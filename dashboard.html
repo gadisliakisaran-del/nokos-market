@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - NOKOS MARKET</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    #06394a,
+                    transparent 30%
+                ),
+                #070b16;
+        }
+
+        .dashboard {
+            padding: 30px 6%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+            animation: show .6s ease;
+        }
+
+        .welcome h1 {
+            font-size: 38px;
+            line-height: 1.1;
+        }
+
+        .welcome h1 span {
+            color: #00e5ff;
+        }
+
+        .welcome p {
+            color: #8f99ad;
+            margin-top: 10px;
+        }
+
+        .balance-card {
+            padding: 30px;
+            border-radius: 25px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #063d4f,
+                    #10154a
+                );
+            border: 1px solid #ffffff12;
+            box-shadow: 0 20px 50px #0005;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .balance-card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #00e5ff22;
+            right: -60px;
+            top: -60px;
+            filter: blur(5px);
+        }
+
+        .balance-title {
+            color: #aab4c7;
+            font-size: 14px;
+        }
+
+        .balance {
+            font-size: 38px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .balance small {
+            color: #00e5ff;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .action {
+            text-decoration: none;
+            color: white;
+            padding: 22px;
+            border-radius: 18px;
+            background: #ffffff08;
+            border: 1px solid #ffffff0d;
+            transition: .3s;
+        }
+
+        .action:hover {
+            transform: translateY(-6px);
+            border-color: #00e5ff;
+            background: #00e5ff0d;
+        }
+
+        .action-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .action h3 {
+            margin-bottom: 5px;
+        }
+
+        .action p {
+            color: #818b9e;
+            font-size: 13px;
+        }
+
+        .section-title {
+            margin-bottom: 15px;
+        }
+
+        .info-card {
+            padding: 25px;
+            border-radius: 20px;
+            background: #ffffff07;
+            border: 1px solid #ffffff0d;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #ffffff0b;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #7f899d;
+        }
+
+        .logout {
+            border: 1px solid #ff505033;
+            color: #ff7777;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            border-color: #ff5050;
+            background: #ff505010;
+        }
+
+        .loading {
+            color: #00e5ff;
+        }
+
+        @keyframes show {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width: 750px) {
+
+            .quick-actions {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .welcome h1 {
+                font-size: 30px;
+            }
+
+        }
+
+        @media(max-width: 450px) {
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            NOKOS<span>MARKET</span>
+        </div>
+
+        <div class="menu">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <button
+                class="logout"
+                id="logoutButton"
+            >
+                Keluar
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="dashboard">
+
+        <section class="welcome">
+
+            <h1>
+                Halo,
+                <span id="userName">
+                    ...
+                </span> 👋
+            </h1>
+
+            <p>
+                Selamat datang di dashboard NOKOS MARKET.
+            </p>
+
+        </section>
+
+
+        <section class="balance-card">
+
+            <div class="balance-title">
+                Saldo kamu
+            </div>
+
+            <div
+                class="balance"
+                id="balance"
+            >
+                Memuat...
+            </div>
+
+        </section>
+
+
+        <section class="quick-actions">
+
+            <a
+                href="order.html"
+                class="action"
+            >
+
+                <div class="action-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Beli NOKOS
+                </h3>
+
+                <p>
+                    Pesan nomor virtual
+                </p>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="action"
+            >
+
+                <div class="action-icon">
+                    💰
+                </div>
+
+                <h3>
+                    Deposit
+                </h3>
+
+                <p>
+                    Tambah saldo akun
+                </p>
+
+            </a>
+
+
+            <a
+                href="history.html"
+                class="action"
+            >
+
+                <div class="action-icon">
+                    📜
+                </div>
+
+                <h3>
+                    Riwayat
+                </h3>
+
+                <p>
+                    Lihat transaksi
+                </p>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="action"
+            >
+
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Profil
+                </h3>
+
+                <p>
+                    Informasi akun
+                </p>
+
+            </a>
+
+        </section>
+
+
+        <h2 class="section-title">
+            Informasi Akun
+        </h2>
+
+
+        <section class="info-card">
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Nama
+                </span>
+
+                <strong id="infoName">
+                    ...
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Email
+                </span>
+
+                <strong id="infoEmail">
+                    ...
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Status
+                </span>
+
+                <strong>
+                    🟢 Aktif
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module">
+
+        import {
+            auth,
+            db
+        } from "./js/firebase.js";
+
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+        import {
+            doc,
+            getDoc
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+        const userName =
+            document.getElementById("userName");
+
+        const infoName =
+            document.getElementById("infoName");
+
+        const infoEmail =
+            document.getElementById("infoEmail");
+
+        const balance =
+            document.getElementById("balance");
+
+
+        onAuthStateChanged(
+            auth,
+            async (user) => {
+
+                if (!user) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                infoEmail.textContent =
+                    user.email || "-";
+
+
+                const userRef =
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    );
+
+
+                try {
+
+                    const snapshot =
+                        await getDoc(userRef);
+
+
+                    if (snapshot.exists()) {
+
+                        const data =
+                            snapshot.data();
+
+
+                        const name =
+                            data.name ||
+                            user.displayName ||
+                            "User";
+
+
+                        userName.textContent =
+                            name;
+
+
+                        infoName.textContent =
+                            name;
+
+
+                        const userBalance =
+                            Number(
+                                data.balance || 0
+                            );
+
+
+                        balance.innerHTML =
+                            "Rp " +
+                            userBalance
+                                .toLocaleString(
+                                    "id-ID"
+                                );
+
+                    } else {
+
+                        userName.textContent =
+                            user.displayName ||
+                            "User";
+
+                        infoName.textContent =
+                            user.displayName ||
+                            "User";
+
+                        balance.textContent =
+                            "Rp 0";
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    balance.textContent =
+                        "Gagal memuat";
+
+                }
+
+            }
+        );
+
+
+        document
+            .getElementById("logoutButton")
+            .addEventListener(
+                "click",
+                async () => {
+
+                    await signOut(auth);
+
+                    window.location.href =
+                        "login.html";
+
+                }
+            );
+
+    </script>
+
+</body>
+
+  </html>
