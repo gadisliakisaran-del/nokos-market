@@ -16,18 +16,18 @@ import {
 
 const firebaseConfig = {
 
-    apiKey: "ISI_API_KEY_KAMU",
+    apiKey: "AIzaSyAwudjyWbOqS0S0ofAJOgTMg-J4tLIfZYA",
 
-    authDomain: "ISI_AUTH_DOMAIN_KAMU",
+    authDomain: "nokos-market.firebaseapp.com",
 
-    projectId: "ISI_PROJECT_ID_KAMU",
+    projectId: "nokos-market",
 
-    storageBucket: "ISI_STORAGE_BUCKET_KAMU",
+    storageBucket: "nokos-market.firebasestorage.app",
 
     messagingSenderId:
-        "ISI_MESSAGING_SENDER_ID_KAMU",
+        "361159469478",
 
-    appId: "ISI_APP_ID_KAMU"
+    appId: "1:361159469478:web:c4de1f6915daa354130767"
 
 };
 
