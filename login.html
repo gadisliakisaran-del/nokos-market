@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - NOKOS MARKET</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+
+        .auth-container {
+
+            min-height: calc(100vh - 70px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px 20px;
+
+        }
+
+
+        .auth-box {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background: rgba(255,255,255,.05);
+
+            border: 1px solid rgba(255,255,255,.1);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.35);
+
+            animation: authShow .6s ease;
+
+        }
+
+
+        .auth-box h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .auth-box h1 span {
+
+            display: inline;
+
+        }
+
+
+        .auth-desc {
+
+            color: #929caf;
+
+            margin-bottom: 25px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid #30394d;
+
+            outline: none;
+
+            background: #0d1321;
+
+            color: white;
+
+            font-size: 15px;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #00e5ff;
+
+        }
+
+
+        .auth-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #00e5ff;
+
+            color: #001018;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+        }
+
+
+        .auth-button:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 30px rgba(0,229,255,.25);
+
+        }
+
+
+        .auth-button:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .message {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            background: rgba(255,60,60,.1);
+
+            border: 1px solid rgba(255,60,60,.3);
+
+            color: #ff8c8c;
+
+        }
+
+
+        .auth-link {
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #8993a8;
+
+        }
+
+
+        .auth-link a {
+
+            color: #00e5ff;
+
+            text-decoration: none;
+
+        }
+
+
+        @keyframes authShow {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            NOKOS<span>MARKET</span>
+
+        </div>
+
+
+        <div class="menu">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="register.html">
+                Daftar
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <main class="auth-container">
+
+
+        <div class="auth-box">
+
+
+            <h1>
+
+                Selamat <span>Datang</span>
+
+            </h1>
+
+
+            <p class="auth-desc">
+
+                Login ke akun NOKOS MARKET kamu.
+
+            </p>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+
+            <form id="loginForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="nama@email.com"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Masukkan password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                    id="loginButton"
+                >
+
+                    🔐 LOGIN
+
+                </button>
+
+
+            </form>
+
+
+
+            <div class="auth-link">
+
+                Belum punya akun?
+
+                <a href="register.html">
+                    Daftar sekarang
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <script type="module">
+
+        import {
+            loginUser
+        } from "./js/auth.js";
+
+
+        const form =
+            document.getElementById("loginForm");
+
+
+        const message =
+            document.getElementById("message");
+
+
+        const button =
+            document.getElementById("loginButton");
+
+
+
+        form.addEventListener(
+            "submit",
+            async (e) => {
+
+                e.preventDefault();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                message.className =
+                    "message";
+
+                message.textContent =
+                    "";
+
+
+                button.disabled = true;
+
+                button.textContent =
+                    "⏳ Login...";
+
+
+                try {
+
+                    await loginUser(
+                        email,
+                        password
+                    );
+
+
+                    window.location.href =
+                        "dashboard.html";
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+
+                    message.className =
+                        "message error";
+
+
+                    switch (error.code) {
+
+                        case "auth/invalid-credential":
+
+                            message.textContent =
+                                "Email atau password salah.";
+
+                            break;
+
+
+                        case "auth/user-not-found":
+
+                            message.textContent =
+                                "Akun tidak ditemukan.";
+
+                            break;
+
+
+                        case "auth/wrong-password":
+
+                            message.textContent =
+                                "Password salah.";
+
+                            break;
+
+
+                        default:
+
+                            message.textContent =
+                                "Login gagal. Periksa konfigurasi Firebase.";
+
+                    }
+
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "🔐 LOGIN";
+
+                }
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>
