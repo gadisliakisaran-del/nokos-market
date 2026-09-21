@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Beli NOKOS - NOKOS MARKET</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .order-page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 6%;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 38px;
+        }
+
+        .page-title p {
+            color: #8d97aa;
+            margin-top: 10px;
+        }
+
+        .order-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+        }
+
+        .order-box,
+        .summary-box {
+            background: #ffffff07;
+            border: 1px solid #ffffff10;
+            border-radius: 22px;
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            color: #dce2ed;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+
+            border-radius: 12px;
+            border: 1px solid #30394d;
+
+            background: #0d1321;
+            color: white;
+
+            outline: none;
+            font-size: 15px;
+        }
+
+        select:focus {
+            border-color: #00e5ff;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .product {
+            padding: 18px;
+
+            border-radius: 16px;
+
+            background: #ffffff06;
+
+            border: 1px solid #ffffff0d;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .product:hover {
+            transform: translateY(-3px);
+            border-color: #00e5ff;
+        }
+
+        .product.active {
+            border-color: #00e5ff;
+            background: #00e5ff10;
+            box-shadow: 0 0 20px #00e5ff10;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .product-country {
+            color: #8b95a8;
+            font-size: 13px;
+        }
+
+        .product-price {
+            color: #00e5ff;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #ffffff0b;
+        }
+
+        .summary-row:last-child {
+            border-bottom: 0;
+        }
+
+        .summary-label {
+            color: #858fa3;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00e5ff;
+        }
+
+        .buy-button {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 16px;
+
+            border: 0;
+            border-radius: 13px;
+
+            background: #00e5ff;
+            color: #001018;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px #00e5ff30;
+        }
+
+        .buy-button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .notice {
+            padding: 15px;
+            border-radius: 13px;
+
+            background: #00e5ff08;
+            border: 1px solid #00e5ff18;
+
+            color: #9ba6ba;
+
+            font-size: 13px;
+            line-height: 1.6;
+
+            margin-top: 20px;
+        }
+
+        .message {
+            display: none;
+
+            padding: 14px;
+
+            margin-bottom: 20px;
+
+            border-radius: 12px;
+
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+
+            color: #ff9999;
+
+            background: #ff44440d;
+
+            border: 1px solid #ff444426;
+        }
+
+        .message.success {
+            display: block;
+
+            color: #74ffc1;
+
+            background: #00ff9910;
+
+            border: 1px solid #00ff9930;
+        }
+
+        .empty {
+            padding: 30px;
+
+            text-align: center;
+
+            color: #8993a7;
+
+            border: 1px dashed #ffffff15;
+
+            border-radius: 15px;
+        }
+
+        @media(max-width: 800px) {
+
+            .order-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width: 500px) {
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            NOKOS<span>MARKET</span>
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="order-page">
+
+        <div class="page-title">
+
+            <h1>
+                📱 Beli NOKOS
+            </h1>
+
+            <p>
+                Pilih negara dan layanan yang tersedia.
+            </p>
+
+        </div>
+
+
+        <div id="message"
+             class="message">
+        </div>
+
+
+        <div class="order-layout">
+
+
+            <section class="order-box">
+
+                <div class="form-group">
+
+                    <label>
+                        Negara
+                    </label>
+
+                    <select id="country">
+
+                        <option value="">
+                            Memuat negara...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Layanan
+                    </label>
+
+                    <div
+                        id="products"
+                        class="product-grid"
+                    >
+
+                        <div class="empty">
+                            Memuat produk...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notice">
+
+                    ⚠️ Harga dan ketersediaan nomor
+                    mengikuti data produk yang tersedia
+                    pada sistem.
+
+                </div>
+
+            </section>
+
+
+            <aside class="summary-box">
+
+                <h2>
+                    Ringkasan
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span class="summary-label">
+                        Negara
+                    </span>
+
+                    <strong id="summaryCountry">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span class="summary-label">
+                        Layanan
+                    </span>
+
+                    <strong id="summaryService">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span class="summary-label">
+                        Harga
+                    </span>
+
+                    <strong
+                        id="summaryPrice"
+                        class="total"
+                    >
+                        Rp 0
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="buyButton"
+                    class="buy-button"
+                    disabled
+                >
+                    🛒 BELI SEKARANG
+                </button>
+
+
+                <div class="notice">
+
+                    Saldo akun akan digunakan
+                    setelah sistem order terhubung
+                    dengan backend dan provider NOKOS.
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <script type="module">
+
+        import {
+            auth,
+            db
+        } from "./js/firebase.js";
+
+
+        import {
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+        import {
+            collection,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+        const country =
+            document.getElementById("country");
+
+
+        const productsContainer =
+            document.getElementById("products");
+
+
+        const summaryCountry =
+            document.getElementById("summaryCountry");
+
+
+        const summaryService =
+            document.getElementById("summaryService");
+
+
+        const summaryPrice =
+            document.getElementById("summaryPrice");
+
+
+        const buyButton =
+            document.getElementById("buyButton");
+
+
+        const message =
+            document.getElementById("message");
+
+
+        let products = [];
+
+        let selectedProduct = null;
+
+
+        onAuthStateChanged(
+            auth,
+            async (user) => {
+
+                if (!user) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                await loadProducts();
+
+            }
+        );
+
+
+        async function loadProducts() {
+
+            try {
+
+                const snapshot =
+                    await getDocs(
+                        collection(
+                            db,
+                            "products"
+                        )
+                    );
+
+
+                products = [];
+
+
+                snapshot.forEach((doc) => {
+
+                    products.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+
+                });
+
+
+                renderCountries();
+
+
+                renderProducts();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                productsContainer.innerHTML = `
+                    <div class="empty">
+                        Gagal mengambil data produk.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        function renderCountries() {
+
+            const countries =
+                [
+                    ...new Set(
+                        products
+                            .filter(
+                                p => p.active !== false
+                            )
+                            .map(
+                                p => p.country
+                            )
+                    )
+                ];
+
+
+            country.innerHTML = `
+                <option value="">
+                    Semua negara
+                </option>
+            `;
+
+
+            countries.forEach(
+                item => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value = item;
+
+                    option.textContent = item;
+
+                    country.appendChild(option);
+
+                }
+            );
+
+        }
+
+
+        function renderProducts() {
+
+            const selectedCountry =
+                country.value;
+
+
+            const filtered =
+                products.filter(
+                    product => {
+
+                        if (
+                            product.active === false
+                        ) {
+                            return false;
+                        }
+
+
+                        if (
+                            selectedCountry &&
+                            product.country !==
+                            selectedCountry
+                        ) {
+                            return false;
+                        }
+
+
+                        return true;
+
+                    }
+                );
+
+
+            productsContainer.innerHTML = "";
+
+
+            if (!filtered.length) {
+
+                productsContainer.innerHTML = `
+                    <div class="empty">
+                        Belum ada produk tersedia.
+                    </div>
+                `;
+
+                selectedProduct = null;
+
+                updateSummary();
+
+                return;
+
+            }
+
+
+            filtered.forEach(
+                product => {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "product";
+
+
+                    card.innerHTML = `
+
+                        <div class="product-name">
+                            📱 ${escapeHtml(
+                                product.service ||
+                                "Layanan"
+                            )}
+                        </div>
+
+                        <div class="product-country">
+                            🌍 ${escapeHtml(
+                                product.country ||
+                                "-"
+                            )}
+                        </div>
+
+                        <div class="product-price">
+                            Rp ${formatRupiah(
+                                product.price || 0
+                            )}
+                        </div>
+
+                    `;
+
+
+                    card.addEventListener(
+                        "click",
+                        () => {
+
+                            document
+                                .querySelectorAll(
+                                    ".product"
+                                )
+                                .forEach(
+                                    el =>
+                                        el.classList
+                                          .remove(
+                                              "active"
+                                          )
+                                );
+
+
+                            card.classList.add(
+                                "active"
+                            );
+
+
+                            selectedProduct =
+                                product;
+
+
+                            updateSummary();
+
+                        }
+                    );
+
+
+                    productsContainer
+                        .appendChild(card);
+
+                }
+            );
+
+        }
+
+
+        country.addEventListener(
+            "change",
+            () => {
+
+                renderProducts();
+
+            }
+        );
+
+
+        function updateSummary() {
+
+            if (!selectedProduct) {
+
+                summaryCountry.textContent =
+                    "-";
+
+                summaryService.textContent =
+                    "-";
+
+                summaryPrice.textContent =
+                    "Rp 0";
+
+                buyButton.disabled =
+                    true;
+
+                return;
+
+            }
+
+
+            summaryCountry.textContent =
+                selectedProduct.country ||
+                "-";
+
+
+            summaryService.textContent =
+                selectedProduct.service ||
+                "-";
+
+
+            summaryPrice.textContent =
+                "Rp " +
+                formatRupiah(
+                    selectedProduct.price || 0
+                );
+
+
+            buyButton.disabled =
+                false;
+
+        }
+
+
+        function formatRupiah(number) {
+
+            return Number(number)
+                .toLocaleString("id-ID");
+
+        }
+
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+
+        }
+
+
+        buyButton.addEventListener(
+            "click",
+            () => {
+
+                if (!selectedProduct) {
+                    return;
+                }
+
+
+                message.className =
+                    "message success";
+
+
+                message.textContent =
+                    "Produk berhasil dipilih. Sistem order otomatis akan kita sambungkan pada tahap backend.";
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
