@@ -1,821 +1,525 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Beli NOKOS - NOKOS MARKET</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-        .order-page {
-            max-width: 1100px;
-            margin: auto;
-            padding: 35px 6%;
-        }
-
-        .page-title {
-            margin-bottom: 25px;
-        }
-
-        .page-title h1 {
-            font-size: 38px;
-        }
-
-        .page-title p {
-            color: #8d97aa;
-            margin-top: 10px;
-        }
-
-        .order-layout {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 25px;
-        }
-
-        .order-box,
-        .summary-box {
-            background: #ffffff07;
-            border: 1px solid #ffffff10;
-            border-radius: 22px;
-            padding: 25px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 9px;
-            color: #dce2ed;
-        }
-
-        select {
-            width: 100%;
-            padding: 15px;
-
-            border-radius: 12px;
-            border: 1px solid #30394d;
-
-            background: #0d1321;
-            color: white;
-
-            outline: none;
-            font-size: 15px;
-        }
-
-        select:focus {
-            border-color: #00e5ff;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .product {
-            padding: 18px;
-
-            border-radius: 16px;
-
-            background: #ffffff06;
-
-            border: 1px solid #ffffff0d;
-
-            cursor: pointer;
-
-            transition: .25s;
-        }
-
-        .product:hover {
-            transform: translateY(-3px);
-            border-color: #00e5ff;
-        }
-
-        .product.active {
-            border-color: #00e5ff;
-            background: #00e5ff10;
-            box-shadow: 0 0 20px #00e5ff10;
-        }
-
-        .product-name {
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .product-country {
-            color: #8b95a8;
-            font-size: 13px;
-        }
-
-        .product-price {
-            color: #00e5ff;
-            font-weight: bold;
-            margin-top: 12px;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-
-            padding: 14px 0;
-
-            border-bottom: 1px solid #ffffff0b;
-        }
-
-        .summary-row:last-child {
-            border-bottom: 0;
-        }
-
-        .summary-label {
-            color: #858fa3;
-        }
-
-        .total {
-            font-size: 22px;
-            font-weight: bold;
-            color: #00e5ff;
-        }
-
-        .buy-button {
-            width: 100%;
-
-            margin-top: 20px;
-
-            padding: 16px;
-
-            border: 0;
-            border-radius: 13px;
-
-            background: #00e5ff;
-            color: #001018;
-
-            font-size: 16px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: .25s;
-        }
-
-        .buy-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px #00e5ff30;
-        }
-
-        .buy-button:disabled {
-            opacity: .5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .notice {
-            padding: 15px;
-            border-radius: 13px;
-
-            background: #00e5ff08;
-            border: 1px solid #00e5ff18;
-
-            color: #9ba6ba;
-
-            font-size: 13px;
-            line-height: 1.6;
-
-            margin-top: 20px;
-        }
-
-        .message {
-            display: none;
-
-            padding: 14px;
-
-            margin-bottom: 20px;
-
-            border-radius: 12px;
-
-            line-height: 1.5;
-        }
-
-        .message.error {
-            display: block;
-
-            color: #ff9999;
-
-            background: #ff44440d;
-
-            border: 1px solid #ff444426;
-        }
-
-        .message.success {
-            display: block;
-
-            color: #74ffc1;
-
-            background: #00ff9910;
-
-            border: 1px solid #00ff9930;
-        }
-
-        .empty {
-            padding: 30px;
-
-            text-align: center;
-
-            color: #8993a7;
-
-            border: 1px dashed #ffffff15;
-
-            border-radius: 15px;
-        }
-
-        @media(max-width: 800px) {
-
-            .order-layout {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-        @media(max-width: 500px) {
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .page-title h1 {
-                font-size: 30px;
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Beli NOKOS - NOKOS MARKET</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0f1020;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #191a2d;
+      border: 1px solid #292a40;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #383950;
+      background: #10111f;
+      color: white;
+      outline: none;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #7c3aed;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .status {
+      padding: 14px;
+      border-radius: 12px;
+      background: #10111f;
+      color: #aaa;
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 12px 0 20px;
+    }
+
+    .back {
+      display: inline-block;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
-
 
 <body>
 
-    <nav class="navbar">
+<div class="container">
 
-        <div class="logo">
-            NOKOS<span>MARKET</span>
-        </div>
+  <a class="back" href="dashboard.html">
+    ← Kembali ke Dashboard
+  </a>
 
-        <div class="menu">
+  <h1>🛒 Beli NOKOS</h1>
 
-            <a href="dashboard.html">
-                Dashboard
-            </a>
+  <p class="subtitle">
+    Pilih server, negara dan layanan
+  </p>
 
-        </div>
 
-    </nav>
+  <div class="card">
 
+    <label>Server</label>
 
-    <main class="order-page">
+    <select id="server">
+      <option value="">Pilih server</option>
+    </select>
 
-        <div class="page-title">
 
-            <h1>
-                📱 Beli NOKOS
-            </h1>
+    <label>Negara</label>
 
-            <p>
-                Pilih negara dan layanan yang tersedia.
-            </p>
+    <select id="country">
+      <option value="">Pilih negara</option>
+    </select>
 
-        </div>
 
+    <label>Layanan</label>
 
-        <div id="message"
-             class="message">
-        </div>
+    <select id="service">
+      <option value="">Pilih layanan</option>
+    </select>
 
 
-        <div class="order-layout">
+    <div class="price" id="price">
+      Rp 0
+    </div>
 
+    <button id="checkButton">
+      Cek Produk
+    </button>
 
-            <section class="order-box">
+    <div class="status" id="status">
+      Silakan pilih produk.
+    </div>
 
-                <div class="form-group">
+  </div>
 
-                    <label>
-                        Negara
-                    </label>
+</div>
 
-                    <select id="country">
 
-                        <option value="">
-                            Memuat negara...
-                        </option>
+<script>
 
-                    </select>
+const API =
+  "https://nokos-market-production.up.railway.app";
 
-                </div>
 
+const serverSelect =
+  document.getElementById("server");
 
-                <div class="form-group">
+const countrySelect =
+  document.getElementById("country");
 
-                    <label>
-                        Layanan
-                    </label>
+const serviceSelect =
+  document.getElementById("service");
 
-                    <div
-                        id="products"
-                        class="product-grid"
-                    >
+const priceElement =
+  document.getElementById("price");
 
-                        <div class="empty">
-                            Memuat produk...
-                        </div>
+const statusElement =
+  document.getElementById("status");
 
-                    </div>
+const checkButton =
+  document.getElementById("checkButton");
 
-                </div>
 
+let providerPrices = [];
 
-                <div class="notice">
 
-                    ⚠️ Harga dan ketersediaan nomor
-                    mengikuti data produk yang tersedia
-                    pada sistem.
+/* Format Rupiah */
 
-                </div>
+function rupiah(value) {
 
-            </section>
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }
+  ).format(value || 0);
 
+}
 
-            <aside class="summary-box">
 
-                <h2>
-                    Ringkasan
-                </h2>
+/* Status */
 
+function status(message) {
 
-                <div class="summary-row">
+  statusElement.textContent =
+    message;
 
-                    <span class="summary-label">
-                        Negara
-                    </span>
+}
 
-                    <strong id="summaryCountry">
-                        -
-                    </strong>
 
-                </div>
+/* LOAD SERVICES */
 
+async function loadServices() {
 
-                <div class="summary-row">
+  try {
 
-                    <span class="summary-label">
-                        Layanan
-                    </span>
+    status("Menghubungkan ke Railway...");
 
-                    <strong id="summaryService">
-                        -
-                    </strong>
+    const response =
+      await fetch(
+        `${API}/api/provider/services`
+      );
 
-                </div>
 
+    const result =
+      await response.json();
 
-                <div class="summary-row">
 
-                    <span class="summary-label">
-                        Harga
-                    </span>
+    console.log(result);
 
-                    <strong
-                        id="summaryPrice"
-                        class="total"
-                    >
-                        Rp 0
-                    </strong>
 
-                </div>
+    if (!result.success) {
 
+      throw new Error(
+        result.message ||
+        "Gagal mengambil service"
+      );
 
-                <button
-                    id="buyButton"
-                    class="buy-button"
-                    disabled
-                >
-                    🛒 BELI SEKARANG
-                </button>
+    }
 
 
-                <div class="notice">
+    /*
+      Kita tampilkan service
+      yang diberikan provider.
+    */
 
-                    Saldo akun akan digunakan
-                    setelah sistem order terhubung
-                    dengan backend dan provider NOKOS.
+    const data =
+      result.data;
 
-                </div>
 
-            </aside>
+    serviceSelect.innerHTML =
+      `<option value="">Pilih layanan</option>`;
 
-        </div>
 
-    </main>
+    /*
+      Jika API mengembalikan array.
+    */
 
+    if (Array.isArray(data)) {
 
-    <script type="module">
+      data.forEach(item => {
 
-        import {
-            auth,
-            db
-        } from "./js/firebase.js";
+        const option =
+          document.createElement("option");
 
+        option.value =
+          item.id ??
+          item.service ??
+          item.code ??
+          "";
 
-        import {
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        option.textContent =
+          item.name ??
+          item.service ??
+          item.title ??
+          option.value;
 
-
-        import {
-            collection,
-            getDocs
-        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-
-        const country =
-            document.getElementById("country");
-
-
-        const productsContainer =
-            document.getElementById("products");
-
-
-        const summaryCountry =
-            document.getElementById("summaryCountry");
-
-
-        const summaryService =
-            document.getElementById("summaryService");
-
-
-        const summaryPrice =
-            document.getElementById("summaryPrice");
-
-
-        const buyButton =
-            document.getElementById("buyButton");
-
-
-        const message =
-            document.getElementById("message");
-
-
-        let products = [];
-
-        let selectedProduct = null;
-
-
-        onAuthStateChanged(
-            auth,
-            async (user) => {
-
-                if (!user) {
-
-                    window.location.href =
-                        "login.html";
-
-                    return;
-
-                }
-
-
-                await loadProducts();
-
-            }
+        serviceSelect.appendChild(
+          option
         );
 
+      });
 
-        async function loadProducts() {
+    }
 
-            try {
 
-                const snapshot =
-                    await getDocs(
-                        collection(
-                            db,
-                            "products"
-                        )
-                    );
+    status(
+      "Service berhasil dimuat."
+    );
 
 
-                products = [];
+  } catch (error) {
 
+    console.error(error);
 
-                snapshot.forEach((doc) => {
+    status(
+      "Gagal mengambil service: " +
+      error.message
+    );
 
-                    products.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
+  }
 
-                });
+}
 
 
-                renderCountries();
+/* CHECK PRICE */
 
+async function checkPrice() {
 
-                renderProducts();
+  const service =
+    serviceSelect.value;
 
+  const country =
+    countrySelect.value;
 
-            } catch (error) {
+  const server =
+    serverSelect.value;
 
-                console.error(error);
 
-                productsContainer.innerHTML = `
-                    <div class="empty">
-                        Gagal mengambil data produk.
-                    </div>
-                `;
+  if (!service) {
 
-            }
+    status(
+      "Pilih layanan terlebih dahulu."
+    );
 
-        }
+    return;
 
+  }
 
-        function renderCountries() {
 
-            const countries =
-                [
-                    ...new Set(
-                        products
-                            .filter(
-                                p => p.active !== false
-                            )
-                            .map(
-                                p => p.country
-                            )
-                    )
-                ];
+  try {
 
+    status("Mengambil harga...");
 
-            country.innerHTML = `
-                <option value="">
-                    Semua negara
-                </option>
-            `;
 
+    const params =
+      new URLSearchParams({
 
-            countries.forEach(
-                item => {
+        service,
+        country,
+        server
 
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
+      });
 
-                    option.value = item;
 
-                    option.textContent = item;
+    const response =
+      await fetch(
+        `${API}/api/provider/prices?${params}`
+      );
 
-                    country.appendChild(option);
 
-                }
-            );
+    const result =
+      await response.json();
 
-        }
 
+    console.log(result);
 
-        function renderProducts() {
 
-            const selectedCountry =
-                country.value;
+    if (!result.success) {
 
+      throw new Error(
+        result.message ||
+        "Harga tidak ditemukan"
+      );
 
-            const filtered =
-                products.filter(
-                    product => {
+    }
 
-                        if (
-                            product.active === false
-                        ) {
-                            return false;
-                        }
 
+    providerPrices =
+      result.data;
 
-                        if (
-                            selectedCountry &&
-                            product.country !==
-                            selectedCountry
-                        ) {
-                            return false;
-                        }
 
+    /*
+      Tampilkan hasil mentah sementara.
+      Nanti kita sesuaikan setelah
+      melihat format response provider.
+    */
 
-                        return true;
+    let price = 0;
 
-                    }
-                );
 
-
-            productsContainer.innerHTML = "";
-
-
-            if (!filtered.length) {
-
-                productsContainer.innerHTML = `
-                    <div class="empty">
-                        Belum ada produk tersedia.
-                    </div>
-                `;
-
-                selectedProduct = null;
-
-                updateSummary();
-
-                return;
-
-            }
-
-
-            filtered.forEach(
-                product => {
-
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    card.className =
-                        "product";
-
-
-                    card.innerHTML = `
-
-                        <div class="product-name">
-                            📱 ${escapeHtml(
-                                product.service ||
-                                "Layanan"
-                            )}
-                        </div>
-
-                        <div class="product-country">
-                            🌍 ${escapeHtml(
-                                product.country ||
-                                "-"
-                            )}
-                        </div>
-
-                        <div class="product-price">
-                            Rp ${formatRupiah(
-                                product.price || 0
-                            )}
-                        </div>
-
-                    `;
-
-
-                    card.addEventListener(
-                        "click",
-                        () => {
-
-                            document
-                                .querySelectorAll(
-                                    ".product"
-                                )
-                                .forEach(
-                                    el =>
-                                        el.classList
-                                          .remove(
-                                              "active"
-                                          )
-                                );
-
-
-                            card.classList.add(
-                                "active"
-                            );
-
-
-                            selectedProduct =
-                                product;
-
-
-                            updateSummary();
-
-                        }
-                    );
-
-
-                    productsContainer
-                        .appendChild(card);
-
-                }
-            );
-
-        }
-
-
-        country.addEventListener(
-            "change",
-            () => {
-
-                renderProducts();
-
-            }
+    if (Array.isArray(providerPrices)) {
+
+      const first =
+        providerPrices[0];
+
+      price =
+        Number(
+          first?.price ??
+          first?.harga ??
+          first?.cost ??
+          0
         );
 
+    } else if (
+      typeof providerPrices === "object"
+    ) {
 
-        function updateSummary() {
-
-            if (!selectedProduct) {
-
-                summaryCountry.textContent =
-                    "-";
-
-                summaryService.textContent =
-                    "-";
-
-                summaryPrice.textContent =
-                    "Rp 0";
-
-                buyButton.disabled =
-                    true;
-
-                return;
-
-            }
-
-
-            summaryCountry.textContent =
-                selectedProduct.country ||
-                "-";
-
-
-            summaryService.textContent =
-                selectedProduct.service ||
-                "-";
-
-
-            summaryPrice.textContent =
-                "Rp " +
-                formatRupiah(
-                    selectedProduct.price || 0
-                );
-
-
-            buyButton.disabled =
-                false;
-
-        }
-
-
-        function formatRupiah(number) {
-
-            return Number(number)
-                .toLocaleString("id-ID");
-
-        }
-
-
-        function escapeHtml(value) {
-
-            return String(value)
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;")
-                .replaceAll('"', "&quot;")
-                .replaceAll("'", "&#039;");
-
-        }
-
-
-        buyButton.addEventListener(
-            "click",
-            () => {
-
-                if (!selectedProduct) {
-                    return;
-                }
-
-
-                message.className =
-                    "message success";
-
-
-                message.textContent =
-                    "Produk berhasil dipilih. Sistem order otomatis akan kita sambungkan pada tahap backend.";
-
-            }
+      price =
+        Number(
+          providerPrices.price ??
+          providerPrices.harga ??
+          providerPrices.cost ??
+          0
         );
 
-    </script>
+    }
+
+
+    priceElement.textContent =
+      rupiah(price);
+
+
+    status(
+      "Harga berhasil diambil dari backend Railway."
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    status(
+      "Gagal mengambil harga: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+checkButton.addEventListener(
+  "click",
+  checkPrice
+);
+
+
+/*
+  Untuk tahap pertama kita
+  isi contoh pilihan negara.
+  Nanti negara akan diambil
+  langsung dari database/provider.
+*/
+
+const countries = [
+
+  {
+    code: "ID",
+    name: "Indonesia"
+  },
+
+  {
+    code: "US",
+    name: "United States"
+  },
+
+  {
+    code: "MY",
+    name: "Malaysia"
+  }
+
+];
+
+
+countries.forEach(country => {
+
+  const option =
+    document.createElement("option");
+
+  option.value =
+    country.code;
+
+  option.textContent =
+    country.name;
+
+  countrySelect.appendChild(
+    option
+  );
+
+});
+
+
+/*
+  Server sementara.
+  Nanti kita sesuaikan dengan
+  server yang tersedia provider.
+*/
+
+const servers = [
+
+  {
+    id: "1",
+    name: "Server 1"
+  }
+
+];
+
+
+servers.forEach(server => {
+
+  const option =
+    document.createElement("option");
+
+  option.value =
+    server.id;
+
+  option.textContent =
+    server.name;
+
+  serverSelect.appendChild(
+    option
+  );
+
+});
+
+
+loadServices();
+
+</script>
 
 </body>
-
-</html>
+    </html>
